@@ -1,10 +1,5 @@
-import DBHelper
 import math
 import Queue
-
-
-  
-
 #Calculate the distance of each point
 def getdisance(data,datalen):
     #print data
@@ -110,23 +105,19 @@ def getlof(data,k,minpts):
     print"lof:",lof
     return lof
 
-K = 4
-MinPts = 4
-db = DBHelper.DBHelper()
-'''
-sqlstate = "select 100-idl_cpu_in,usep_mem_in,usep_swap_in,pagein_in,pageout_in,interrupts1_in,interrupts2_in,interrupts3_in,loadavg1_in*100,loadavg5_in*100,loadavg15_in*100,read_total_in,writ_total_in,ps_root_in,ps_other_in,use_cpu_out,recv_net_out,send_net_out,lsmod_out,ps_out from state"
-data = db.oncesql(sqlstate)
-datalen = len(data) 
-print "len: ",datalen,len(data[0])
-print len(getlof(data,K,MinPts))
-'''
-
-sqlps = "select prio,minflt,majflt,utime,stime,start_time,realstart_time,totalfiles,unix, netlink,tcp,udp,tcpv6,eventfd,inotify, timerfd, signalfd, eventpoll, pipe, filenum,totalsyscall,ps_control,file_rw,file_control,sys_control,mem_control,net_control,socket_control,user_control,ps_communcation from psinfo limit 0,1500"
-
-psdata = db.oncesql(sqlps)
-print "psdata len:",len(psdata)
-pslof = getlof(psdata,K,MinPts)
-print pslof[0:190]
-
+if __name__ == '__main__':
+    K = 3
+    MinPts = 3
+    #test data
+    psdata = [[55,88,40,62,75],
+              [40,85,45,65,75],
+              [55,80,40,58,75],
+              [45,88,42,62,70],
+              [55,82,38,66,78],
+              [55,50,99,99,20],
+              [58,70,40,60,80],
+              [0,0,0,0,0]]
+    print "psdata len:",len(psdata)
+    pslof = getlof(psdata,K,MinPts)
 
 	
